@@ -1,12 +1,25 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
+import Header from '@/components/Header/Header';
+import { getAllMenus } from '@/queries/get-menus'
+import { Key } from 'react';
 
-const inter = Inter({ subsets: ['latin'] })
+export async function getStaticProps() {
+  const AllMenus = await getAllMenus();
+  return {
+    props: {
+      headerMenu: AllMenus.headerMenu,
+      footerMenu: AllMenus.footerMenu,
+    }
+  };
+}
 
-export default function Home() {
+export function Home({ headerMenu, footerMenu }: any) {
   return (
     <main>
-      Hello, Learning wordpress-headless with nextjs
+      <Header headerMenu={headerMenu} />
+      <div>Hello, Learning wordpress-headless with nextjs</div>
     </main>
   )
 }
+
+export default Home
+

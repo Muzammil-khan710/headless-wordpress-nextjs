@@ -19,6 +19,6 @@
       "components": ["./src/components/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/apollo/client.js"],
   "exclude": ["node_modules"]
 }
