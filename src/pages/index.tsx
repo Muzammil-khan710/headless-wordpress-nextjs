@@ -9,14 +9,13 @@ export async function getStaticProps() {
     query:GET_MENUS, 
   })
 
-  console.log(data)
-
   return {
     props: {
       headerMenu: data.headerMenu.edges,
       footerMenu: data.footerMenu.edges,
       posts: data.posts.edges
-    }
+    },
+    revalidate:10
   }
 }
 
