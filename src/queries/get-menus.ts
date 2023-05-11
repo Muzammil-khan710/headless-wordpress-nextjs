@@ -37,7 +37,6 @@ export async function getAllMenus() {
   }
 
   const response  = await graphqlRequest(query)
-  console.log(response)
   const allMenus = response?.data
   return allMenus
 }

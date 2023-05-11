@@ -1,20 +1,32 @@
-import { getAllPosts } from "@/queries/get-posts"
+import { GET_MENUS } from "@/queries/old-query"
+import client from '../../apollo/server'
+import Header from "@/components/Header/Header"
+import Footer from "@/components/Footer/Footer"
 
-type Props = {}
+type Props = {
+  headerMenu:any
+  footerMenu:any
+}
 
 export async function getStaticProps() {
-    const allPosts = await getAllPosts()
-    console.log(allPosts)
+    const { data } = await client.query({
+      query:GET_MENUS, 
+    })
+
     return {
-        props: {
-          allPosts: allPosts
-        }
+      props: {
+        headerMenu: data.headerMenu.edges,
+        footerMenu: data.footerMenu.edges,
+      }
     }
 }
 
-const blog = (props: Props) => {
+const blog = ({headerMenu, footerMenu}: Props) => {
   return (
-    <div>This is blog page</div>
+    <section>
+      <Header data={headerMenu}/>
+      <Footer data={footerMenu}/>
+    </section>
   )
 }
 

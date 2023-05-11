@@ -1,4 +1,11 @@
-import { ApolloClient, InMemoryCache, createHttpLink } from "@apollo/client";
+import { ApolloClient, InMemoryCache } from "@apollo/client";
+
+const client = new ApolloClient({
+  uri: `${process.env.NEXT_PUBLIC_WORDPRESS_SITE_URL}`,
+  cache: new InMemoryCache(),
+});
+
+export default client;
 
 // const defaultOptions = {
 //   watchQuery: {
@@ -18,10 +25,3 @@ import { ApolloClient, InMemoryCache, createHttpLink } from "@apollo/client";
 // const link = createHttpLink({
 //   uri: `${process.env.NEXT_PUBLIC_WORDPRESS_SITE_URL}/graphql`
 // })
-
-const client = new ApolloClient({
-  uri: `${process.env.NEXT_PUBLIC_WORDPRESS_SITE_URL}/graphql`,
-  cache: new InMemoryCache(),
-});
-
-export default client;

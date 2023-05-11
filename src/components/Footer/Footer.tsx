@@ -4,10 +4,9 @@ type Props = {
     data: any
 }
 
-const Header = ({ data }: Props) => {
-    
+const Footer = ({ data }: Props) => {
     return (
-        <header className="flex justify-end bg-blue-500 p-8 gap-5">
+        <footer className="flex justify-start  bg-blue-400 p-8 gap-5">
             {data.map((item: any, i: number) => {
                 return (
                     <Link href={item.node.path.replace('/index.php', '')} key={i}>
@@ -15,8 +14,8 @@ const Header = ({ data }: Props) => {
                     </Link>
                 )
             })}
-        </header>
+        </footer>
     )
 }
 
-export default Header
+export default Footer
