@@ -9,24 +9,27 @@ export async function getStaticProps() {
     query:GET_MENUS, 
   })
 
+  console.log(data)
+
   return {
     props: {
       headerMenu: data.headerMenu.edges,
       footerMenu: data.footerMenu.edges,
-      posts: data.posts.edges
+      posts: data.posts.edges,
+      footerData: data.footer
     },
     revalidate:10
   }
 }
 
-export function Home({ headerMenu, footerMenu, posts }: any) {
-  console.log(posts)
+export function Home({ headerMenu, footerMenu, posts, footerData }: any) {
+  console.log(footerData)
   return (
     <main className='flex flex-col h-screen justify-between'>
       <Header data={headerMenu} />
       <h1 className='text-4xl text-center'>Hello, Learning wordpress-headless with nextjs</h1>
       <BlogCard data={posts}/>
-      <Footer data={footerMenu}/>
+      <Footer data={footerMenu} footerData={footerData}/>
     </main>
   )
 }

@@ -2,6 +2,11 @@ import { gql } from "@apollo/client";
 
 export const GET_MENUS = gql`
 query MyQuery {
+    header: getHeader {
+      favicon
+      siteTagLine
+      siteTitle
+    }
     headerMenu: menuItems(where: {location: HCMS_MENU_HEADER, parentId: "0"}) {
       edges {
         node {
@@ -20,6 +25,13 @@ query MyQuery {
           url
           path
         }
+      }
+    }
+    footer: getFooter {
+      copyrightText
+      socialLinks {
+        iconUrl
+        iconName
       }
     }
     posts {
