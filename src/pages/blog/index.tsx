@@ -6,6 +6,7 @@ import Footer from "@/components/Footer/Footer"
 type Props = {
   headerMenu:any
   footerMenu:any
+  footerData:any
 }
 
 export async function getStaticProps() {
@@ -17,15 +18,16 @@ export async function getStaticProps() {
       props: {
         headerMenu: data.headerMenu.edges,
         footerMenu: data.footerMenu.edges,
+        footerData: data.footer
       }
     }
 }
 
-const blog = ({headerMenu, footerMenu}: Props) => {
+const blog = ({headerMenu, footerMenu, footerData}: Props) => {
   return (
     <section>
       <Header data={headerMenu}/>
-      <Footer data={footerMenu}/>
+      <Footer data={footerMenu} footerData={footerData}/>
     </section>
   )
 }
