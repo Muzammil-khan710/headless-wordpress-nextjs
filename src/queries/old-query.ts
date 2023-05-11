@@ -22,4 +22,11 @@ query MyQuery {
         }
       }
     }
-}`
+    posts {
+      edges {
+        node {
+          title
+        }
+      }
+    }
+  }`

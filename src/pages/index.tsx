@@ -1,4 +1,5 @@
 import client from '@/apollo/server';
+import BlogCard from '@/components/BlogCard/BlogCard';
 import Footer from '@/components/Footer/Footer';
 import Header from '@/components/Header/Header';
 import { GET_MENUS } from '@/queries/old-query';
@@ -8,19 +9,24 @@ export async function getStaticProps() {
     query:GET_MENUS, 
   })
 
+  console.log(data)
+
   return {
     props: {
       headerMenu: data.headerMenu.edges,
       footerMenu: data.footerMenu.edges,
+      posts: data.posts.edges
     }
   }
 }
 
-export function Home({ headerMenu, footerMenu }: any) {
+export function Home({ headerMenu, footerMenu, posts }: any) {
+  console.log(posts)
   return (
     <main className='flex flex-col h-screen justify-between'>
       <Header data={headerMenu} />
-      <div>Hello, Learning wordpress-headless with nextjs</div>
+      <h1 className='text-4xl text-center'>Hello, Learning wordpress-headless with nextjs</h1>
+      <BlogCard data={posts}/>
       <Footer data={footerMenu}/>
     </main>
   )
