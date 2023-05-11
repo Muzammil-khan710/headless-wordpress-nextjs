@@ -7,7 +7,7 @@ query MyQuery {
         link
         title
         slug
-        excerpt
+        content
         }
     }
 }`

@@ -9,8 +9,6 @@ export async function getStaticProps() {
     query:GET_MENUS, 
   })
 
-  console.log(data)
-
   return {
     props: {
       headerMenu: data.headerMenu.edges,
@@ -23,7 +21,7 @@ export async function getStaticProps() {
 }
 
 export function Home({ headerMenu, footerMenu, posts, footerData }: any) {
-  console.log(footerData)
+  // console.log(posts) 
   return (
     <main className='flex flex-col h-screen justify-between'>
       <Header data={headerMenu} />

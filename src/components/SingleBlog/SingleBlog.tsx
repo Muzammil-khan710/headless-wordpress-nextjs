@@ -10,7 +10,7 @@ const SingleBlog = ({data}: Props) => {
         {data.map((item:any) => (
             <React.Fragment key={item.link}>
                 <h1>{item.title}</h1>
-                <p>{item.excerpt}</p>
+                <div dangerouslySetInnerHTML={{ __html: item.content}} />
             </React.Fragment>
         ))}
     </section>
