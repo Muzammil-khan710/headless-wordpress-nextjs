@@ -38,6 +38,7 @@ query MyQuery {
       edges {
         node {
           title
+          slug
         }
       }
     }
