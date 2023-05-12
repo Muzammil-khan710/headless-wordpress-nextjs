@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client"
 
 export const GET_POST_WITH_PAGE = gql`
-query MyQuery($slug: String = "hello-world") {
+query MyQuery($slug: ID = "hello-world") {
     headerMenu: menuItems(where: {location: HCMS_MENU_HEADER, parentId: "0"}) {
       edges {
         node {
@@ -29,11 +29,11 @@ query MyQuery($slug: String = "hello-world") {
         iconName
       }
     }
-  postBy(slug: $slug) {
+    post(id: $slug, idType: SLUG) {
       link
       title
-      slug
       excerpt
       uri
+      slug
     }
   }`
