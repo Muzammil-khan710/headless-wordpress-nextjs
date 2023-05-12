@@ -68,7 +68,8 @@ export async function getStaticProps({ params }: any) {
             footerMenu: data.footerMenu.edges,
             footerData: data.footer,
             seoData: data.post.seo
-        }
+        },
+        revalidate:10
     }
 }
 
