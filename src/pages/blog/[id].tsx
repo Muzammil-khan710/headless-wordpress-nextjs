@@ -4,6 +4,7 @@ import Header from '@/components/Header/Header'
 import SingleBlog from '@/components/SingleBlog/SingleBlog'
 import { GET_ALL_POSTS } from '@/queries/get-allposts'
 import { GET_POST_WITH_PAGE } from '@/queries/get-post-with-page'
+import { NextSeo } from 'next-seo'
 import React from 'react'
 
 type Props = {
@@ -11,15 +12,25 @@ type Props = {
     headerMenu: any
     footerMenu: any
     footerData:any
+    seoData:any
 }
 
-const DynamicBlog = ({ post, headerMenu, footerMenu, footerData }: Props) => {
-    console.log(footerData)
+const DynamicBlog = ({ post, headerMenu, footerMenu, footerData, seoData }: Props) => {
     return (
         <>
+            <NextSeo
+                title={seoData.title}
+                description={seoData.metaDesc}
+                openGraph={{
+                    url: seoData.openGraphUrl, 
+                    type: seoData.openGraphType,
+                    siteName: seoData.openGraphSiteName, 
+                }}
+            />
             <Header data={headerMenu} />
             <SingleBlog data={post} />
             <Footer  data={footerMenu} footerData={footerData}/>
+            <script type='application/ld+json' dangerouslySetInnerHTML={{__html: seoData.schema.raw}}/>
         </>
     )
 }
@@ -55,7 +66,8 @@ export async function getStaticProps({ params }: any) {
             post: data.post,
             headerMenu: data.headerMenu.edges,
             footerMenu: data.footerMenu.edges,
-            footerData: data.footer
+            footerData: data.footer,
+            seoData: data.post.seo
         }
     }
 }
