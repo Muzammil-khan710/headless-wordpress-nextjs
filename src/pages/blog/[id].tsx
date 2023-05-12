@@ -1,48 +1,52 @@
 import client from '@/apollo/server'
+import Footer from '@/components/Footer/Footer'
+import Header from '@/components/Header/Header'
+import SingleBlog from '@/components/SingleBlog/SingleBlog'
 import { GET_ALL_POSTS } from '@/queries/get-allposts'
 import { GET_POST_D } from '@/queries/get-post-d'
-import Link from 'next/link'
+import { GET_POST_WITH_PAGE } from '@/queries/get-post-with-page'
 import React from 'react'
 
 
 type Props = {
-    data:any
+    post: any
+    headerMenu: any
+    footerMenu: any
+    footerData:any
 }
 
-const DynamicBlog = ({data}: Props) => {
-  return (
-    <>
-        <h1 className='text-4xl text-center my-2'>{data.title}</h1>
-        <div className='my-20 px-10 text-lg max-w-[800px] text-center flex mx-auto' dangerouslySetInnerHTML={{__html:data.excerpt}}/>
-        <a className='flex border border-black p-4 rounded-lg bg-slate-300 hover:bg-slate-400 transition  mx-auto w-max' href={`${process.env.NEXT_PUBLIC_WORDPRESS_SITE_URL}${data.uri}`}>Link to original blog</a>
-        <Link className='underline text-center flex mx-auto w-max mt-4' href={'/'}>Back to home</Link>
-    </>
-  )
+const DynamicBlog = ({ post, headerMenu, footerMenu, footerData }: Props) => {
+    console.log(footerData)
+    return (
+        <>
+            <Header data={headerMenu} />
+            <SingleBlog data={post} />
+            <Footer  data={footerMenu} footerData={footerData}/>
+        </>
+    )
 }
 
 export default DynamicBlog
 
 export async function getStaticPaths() {
     const { data } = await client.query({
-        query:GET_ALL_POSTS
+        query: GET_ALL_POSTS
     })
 
-    const paths = data.posts.nodes.map(({slug}:any) => ({params: {id:slug}}))
+    const paths = data.posts.nodes.map(({ slug }: any) => ({ params: { id: slug } }))
 
     return {
         paths,
-        fallback:false
+        fallback: false
     }
 }
 
-export async function getStaticProps({params}:any) {
+export async function getStaticProps({ params }: any) {
 
     const { id } = params
 
-    console.log(id)
-
     const { data } = await client.query({
-        query:GET_POST_D,
+        query: GET_POST_WITH_PAGE,
         variables: {
             slug: id
         }
@@ -50,7 +54,10 @@ export async function getStaticProps({params}:any) {
 
     return {
         props: {
-            data:data.postBy
+            post: data.postBy,
+            headerMenu: data.headerMenu.edges,
+            footerMenu: data.footerMenu.edges,
+            footerData: data.footer
         }
     }
 }
