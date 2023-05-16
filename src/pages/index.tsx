@@ -1,5 +1,5 @@
 import client from '@/apollo/server';
-import BlogCard from '@/components/BlogCard/BlogCard';
+import BlogCard from '@/components/Blog/BlogCard';
 import Footer from '@/components/Footer/Footer';
 import Header from '@/components/Header/Header';
 import { GET_MENUS } from '@/queries/old-query';
@@ -21,7 +21,6 @@ export async function getStaticProps() {
 }
 
 export function Home({ headerMenu, footerMenu, posts, footerData }: any) {
-  console.log(posts) 
   return (
     <main className='flex flex-col h-screen justify-between'>
       <Header data={headerMenu} />
