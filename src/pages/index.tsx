@@ -21,7 +21,7 @@ export async function getStaticProps() {
 }
 
 export function Home({ headerMenu, footerMenu, posts, footerData }: any) {
-  // console.log(posts) 
+  console.log(posts) 
   return (
     <main className='flex flex-col h-screen justify-between'>
       <Header data={headerMenu} />
